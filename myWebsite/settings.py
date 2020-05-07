@@ -20,10 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '68.183.110.32',
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'myWebsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = os.environ.get('DATABASES')
+DATABASES = ''
 
 
 # Password validation
@@ -128,9 +128,14 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = ''
+EMAIL_HOST = ''
+EMAIL_USE_TLS = ''
+EMAIL_PORT = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
