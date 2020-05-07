@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contect %}
+<img src="{% static 'drops.png' %}" width="100%" class="edit-drops-margins"/>
+<div class="container">
+  <h1>Blog</h1>
+  {% for post in posts %}
+  <div class="card text-center mt-3">
+    <div class="card-header">
+      <h4>
+      {{ post.title }}
+      </h4>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ post.summary }}</p>
+      <a href="{% url 'detail_post' post.id %}" class="btn btn-outline-success">Open Full Post</a>
+    </div>
+    <div class="card-footer text-muted">
+      {{ post.post_date }}
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+  {% endblock %}

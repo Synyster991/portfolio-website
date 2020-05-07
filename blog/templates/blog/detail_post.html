@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contect %}
+<img src="{% static 'drops.png' %}" width="100%" class="edit-drops-margins"/>
+<div class="container mb-5">
+  <h1>{{ post.title }}</h1>
+  <hr>
+  <div class="row">
+    <div class="col-sm-6 text-justify">
+      {{ post.body }}
+      {% if post.link %}
+      <a href="{{ post.link }}" class="btn btn-outline-secondary btn-block mt-5 mb-5" target="_blank">Link</a>
+      {% endif %}
+    </div>
+    <div class="col-sm-6">
+      <img src="{{ post.image.url }}" width="100%" />
+      <p>{{ post.post_date }}</p>
+    </div>
+  </div>
+  <hr class="mb-5">
+  <h3>Add New Comment</h3>
+  {% if messages %}
+  <ul class="messages alert alert-info" role="alert">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  <form method="POST" action="{% url 'add_comment' post.id %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Name</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" name="person">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Comment</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
+    </div>
+    <button type="submit" class="btn btn-outline-success btn-block">Add</button>
+  </form>
+  <hr class="mb-5">
+  <h3>Comments</h3>
+  {% for comment in comments.all %}
+  <div class="card mt-3">
+    <div class="card-header">
+      {{ comment.person }}
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p>{{ comment.body }}</p>
+        <footer class="blockquote-footer"><cite title="Source Title">{{ comment.post_date }}</cite></footer>
+      </blockquote>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

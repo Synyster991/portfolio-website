@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contect %}
+<img src="{% static 'drops.png' %}" width="100%" class="edit-drops-margins"/>
+<div class="container">
+  <h1>{{ achievement.title }}</h1>
+  <h4>{{ achievement.sub_title }}</h4>
+  <hr>
+  <div class="row">
+    <div class="col-sm-6 text-justify">
+      {{ achievement.body }}
+      {% if post.link %}
+      <a href="{{ post.link }}" class="btn btn-outline-dark btn-block mt-5 mb-5 pt-2 pb-2" target="_blank">Link</a>
+      {% endif %}
+    </div>
+    <div class="col-sm-6">
+      <img src="{{ achievement.image.url }}" width="100%" />
+      <p>Issued by {{ achievement.issued_by }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

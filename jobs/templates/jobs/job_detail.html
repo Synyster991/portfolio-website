@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contect %}
+
+<img src="{% static 'drops.png' %}" width="100%" class="edit-drops-margins"/>
+<div class="container">
+  <h1>{{ job.title }}</h1>
+  <hr>
+  <div class="row">
+    <div class="col-sm-6 text-justify">
+      {{ job.description }}
+      {% if job.source_link %}
+      <a href="{{ post.link }}" class="btn btn-dark btn-block mt-4 mb-3" target="_blank">Source Code</a>
+      {% endif %}
+      {% if job.preview_link %}
+      <a href="{{ post.link }}" class="btn btn-outline-dark btn-block mt-1 mb-3" target="_blank">Preview Link</a>
+      {% endif %}
+    </div>
+    <div class="col-sm-6">
+      <img src="{{ job.image.url }}" width="100%" />
+      <p>{{ post.post_date }}</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

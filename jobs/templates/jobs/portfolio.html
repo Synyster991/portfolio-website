@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contect %}
+<img src="{% static 'drops.png' %}" width="100%" class="edit-drops-margins"/>
+<div class="container" >
+<h1>Portfolio</h1>
+  <div class="album">
+      <div class="row" >
+        {% for job in jobs %}
+        <div class="col-md-4 hover-card-effect" >
+          <a href="{% url 'job_detail' job.id %}" class="hover-card-effect text-muted text-decoration-none">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{ job.image.url }}" width="100%" height="100%"/>
+            <div class="card-body">
+              <h5>{{ job.title }}</h5>
+              <p class="card-text">{{ job.summary }}</p>
+            </div>
+          </div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
