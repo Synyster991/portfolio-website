@@ -34,7 +34,9 @@ SECRET_KEY = '80dqqn^#by+p8vba%sb1!61&6aj#&=f_xnjxx2s*0zsonegkxv'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '*',
+    '68.183.110.32',
+    'filipdimitrievski.com',
+    'www.filipdimitrievski.com',
 ]
 
 
