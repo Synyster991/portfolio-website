@@ -10,7 +10,7 @@ from .models import Job, Achievement
 
 def index(request):
     """Redirect to index page and return 3 jobs"""
-    jobs = Job.objects.all().order_by('-id')
+    jobs = Job.objects.all().order_by('-id')[:3]
 
     passing_dict = {
         'jobs': jobs
@@ -44,7 +44,7 @@ def job_detail(request, pk):
 
 def achievements(request):
     """Redirect to achievements and list them"""
-    achievements_all = Achievement.objects.all()
+    achievements_all = Achievement.objects.all().order_by('-id')
 
     passing_dict = {
         'achievements': achievements_all
