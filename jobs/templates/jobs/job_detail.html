@@ -11,10 +11,10 @@
     <div class="col-sm-6 text-justify">
       {{ job.description }}
       {% if job.source_link %}
-      <a href="{{ post.link }}" class="btn btn-dark btn-block mt-4 mb-3" target="_blank">Source Code</a>
+      <a href="{{ post.source_link }}" class="btn btn-dark btn-block mt-4 mb-3" target="_blank">Source Code</a>
       {% endif %}
       {% if job.preview_link %}
-      <a href="{{ post.link }}" class="btn btn-outline-dark btn-block mt-1 mb-3" target="_blank">Preview Link</a>
+      <a href="{{ post.preview_link }}" class="btn btn-outline-dark btn-block mt-1 mb-3" target="_blank">Preview Link</a>
       {% endif %}
     </div>
     <div class="col-sm-6">
