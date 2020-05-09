@@ -12,8 +12,8 @@ def blog(request):
     passing_dict = {
         'posts': posts,
     }
-    redirect('blog')
-    # return render(request, 'blog/blog.html', passing_dict)
+
+    return render(request, 'blog/blog.html', passing_dict)
 
 
 def detail_post(request, pk):

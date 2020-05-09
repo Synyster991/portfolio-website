@@ -9,9 +9,9 @@
     {% csrf_token %}
     <div class="form-group">
       <label >Find your favorite post</label>
-      <input type="text"maxlength="255" class="form-control" value="{{ last_search }}">
+      <input type="text" id="search_id" name="search_term" maxlength="255" class="form-control" value="{{ last_search }}">
       {% if message %}
-      {% if msg_num > 1 %}
+      {% if msg_num > 1%}
       <div class="alert alert-warning mt-1" role="alert">
       {% else %}
       <div class="alert alert-success mt-1" role="alert">
