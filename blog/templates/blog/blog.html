@@ -5,13 +5,13 @@
 <img src="{% static 'drops.png' %}" width="100%" class="edit-drops-margins" />
 <div class="container">
   <h1>Blog</h1>
-  <form id="form_id" method='POST' action="{% url 'search_post' %}" class="">
+  <form method='POST' action="{% url 'search_post' %}">
     {% csrf_token %}
     <div class="form-group">
       <label >Find your favorite post</label>
-      <input type="text" id="search_id" name="search_term" maxlength="255" class="form-control" value="{{ last_search }}">
+      <input type="text"maxlength="255" class="form-control" value="{{ last_search }}">
       {% if message %}
-      {% if msg_num > 1%}
+      {% if msg_num > 1 %}
       <div class="alert alert-warning mt-1" role="alert">
       {% else %}
       <div class="alert alert-success mt-1" role="alert">
@@ -27,6 +27,7 @@
     <button type='submit' class='btn btn-success'>Search</button>
     <a href="{% url 'blog' %}" class="btn btn-secondary">Show all</a>
   </form>
+</div>
 <hr>
 {% for post in posts %}
   <div class="card text-center mt-3">
