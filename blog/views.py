@@ -10,7 +10,7 @@ def blog(request):
     posts = Post.objects.all().order_by('-id')
 
     passing_dict = {
-        'posts': posts
+        'posts': posts,
     }
     return render(request, 'blog/blog.html', passing_dict)
 
@@ -47,3 +47,34 @@ def add_comment(request, pk):
             return redirect('detail_post', pk)
     else:
         return redirect('detail_post', pk)
+
+
+def search_post(request):
+    posts = Post.objects.all()
+    search_results = []
+    num_of_results = 0
+
+    for post in posts:
+        if str(post).lower().find(request.POST['search_term'].lower()) != -1:
+            search_results.append(post)
+            num_of_results += 1
+
+    if not search_results:
+        filtered_posts = []
+        message = ["Nothing is found by this name",
+                   "Unfortunately that post doesn't exists",
+                   "Email Filip if you want to hear his opinion about that"]
+    else:
+        filtered_posts = search_results
+        if num_of_results == 1:
+            message = ['{} results is found'.format(num_of_results)]
+        else:
+            message = ['{} results are found'.format(num_of_results)]
+
+    passing_dict = {
+        'posts': filtered_posts,
+        'message': message,
+        'last_search': request.POST['search_term'],
+        'msg_num': len(message)
+    }
+    return render(request, 'blog/blog.html', passing_dict)

@@ -2,14 +2,37 @@
 {% load static %}
 
 {% block contect %}
-<img src="{% static 'drops.png' %}" width="100%" class="edit-drops-margins"/>
+<img src="{% static 'drops.png' %}" width="100%" class="edit-drops-margins" />
 <div class="container">
   <h1>Blog</h1>
-  {% for post in posts %}
+  <form id="form_id" method='POST' action="{% url 'search_post' %}" class="">
+    {% csrf_token %}
+    <div class="form-group">
+      <label >Find your favorite post</label>
+      <input type="text" id="search_id" name="search_term" maxlength="255" class="form-control" value="{{ last_search }}">
+      {% if message %}
+      {% if msg_num > 1%}
+      <div class="alert alert-warning mt-1" role="alert">
+      {% else %}
+      <div class="alert alert-success mt-1" role="alert">
+      {% endif %}
+      <ul>
+        {% for msg in message %}
+        <li><small id="emailHelp" class="form-text text-muted">{{ msg }}</small></li>
+        {% endfor %}
+      </ul>
+      </div>
+      {% endif %}
+    </div>
+    <button type='submit' class='btn btn-success'>Search</button>
+    <a href="{% url 'blog' %}" class="btn btn-secondary">Show all</a>
+  </form>
+<hr>
+{% for post in posts %}
   <div class="card text-center mt-3">
     <div class="card-header">
       <h4>
-      {{ post.title }}
+        {{ post.title }}
       </h4>
     </div>
     <div class="card-body">
@@ -21,5 +44,6 @@
     </div>
   </div>
   {% endfor %}
-  </div>
-  {% endblock %}
+</div>
+
+{% endblock %}
