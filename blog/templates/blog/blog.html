@@ -23,12 +23,15 @@
       </ul>
       </div>
       {% endif %}
-    </div>
+        </div>
+
     <button type='submit' class='btn btn-success'>Search</button>
     <a href="{% url 'blog' %}" class="btn btn-secondary">Show all</a>
+    </div>
   </form>
-</div>
+
 <hr>
+<div class="container">
 {% for post in posts %}
   <div class="card text-center mt-3">
     <div class="card-header">
@@ -45,6 +48,7 @@
     </div>
   </div>
   {% endfor %}
+</div>
 </div>
 
 {% endblock %}
