@@ -25,7 +25,10 @@ SECRET_KEY = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ''
 
-ALLOWED_HOSTS = ['']
+ALLOWED_HOSTS = [
+    'filipdimitrievski.com',
+    'www.filipdimitrievski.com',
+]
 
 # Application definition
 

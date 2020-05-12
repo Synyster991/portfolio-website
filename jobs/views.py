@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import send_mail
 
 from .models import Job, Achievement
@@ -30,7 +30,7 @@ def portfolio(request):
 
 def job_detail(request, pk):
     """Showing detail of a job"""
-    job = Job.objects.get(pk=pk)
+    job = get_object_or_404(Job, pk=pk)
 
     passing_dict = {
         'job': job
@@ -50,7 +50,7 @@ def achievements(request):
 
 def achievement_detail(request, pk):
     """Showing detail of a achievement"""
-    achievement = Achievement.objects.get(pk=pk)
+    achievement = get_object_or_404(Achievement, pk=pk)
 
     passing_dict = {
         'achievement': achievement

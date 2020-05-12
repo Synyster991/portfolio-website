@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -19,7 +19,7 @@ def blog(request):
 
 def detail_post(request, pk):
     """Show details of the post"""
-    post = Post.objects.get(id=pk)
+    post = get_object_or_404(Post, pk=pk)
     comments = Comment.objects.filter(post=post)
 
     passing_dict = {
