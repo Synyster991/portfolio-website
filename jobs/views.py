@@ -4,6 +4,12 @@ from django.core.mail import send_mail
 from .models import Job, Achievement
 
 
+def handler404(request, *args, **argv):
+    response = render('404.html')
+    response.status_code = 404
+    return response
+
+
 def index(request):
     """Redirect to index page and return 3 jobs"""
     jobs = Job.objects.all().order_by('-id')[:3]

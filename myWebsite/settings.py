@@ -126,6 +126,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+handler404 = 'jobs.views.handler404'
+
 try:
     from .local_settings import *
 except ImportError:
