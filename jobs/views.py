@@ -1,9 +1,5 @@
-import os
-
 from django.shortcuts import render, redirect
-
 from django.core.mail import send_mail
-from django.conf import settings
 
 from .models import Job, Achievement
 
@@ -64,14 +60,16 @@ def achievement_detail(request, pk):
 
 def send_email_from_about(request):
     """Send email with gmail services"""
-    subject = 'Wave from portfolio'
+    subject = 'Wave from Portfolio About'
     message = 'from: {} \n\n{}'.format(request.POST['guest_email'], request.POST['guest_msg'])
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['filipdimi1999@gmail.com', ]
-    send_mail('Auto-reply from filipdimitrievski.com ', 'Thank you for contacting me. \nI will reply as soon as '
-                                                        'possible. \n\nRegards, '
-                                                        '\nFilip Dimitrievski', email_from,
-              [request.POST['guest_email']], )
-    send_mail(subject, message, email_from, recipient_list)
+    sender = 'f_dimitrievski@outlook.com'
+    receiver = ['filipdimi1999@gmail.com']
 
+    auto_reply_subject = 'Auto-reply from filipdimitrievski.com'
+    auto_reply_message = 'Thank you for contacting me. \nI will reply as soon as possible. \n\nRegards, \nFilip ' \
+                         'Dimitrievski'
+    auto_reply_receiver = [request.POST['guest_email']]
+
+    send_mail(subject, message, sender, receiver)
+    send_mail(auto_reply_subject, auto_reply_message, sender, auto_reply_receiver)
     return redirect('about')
