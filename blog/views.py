@@ -62,7 +62,8 @@ def search_post(request):
     num_of_results = 0
 
     for post in posts:
-        if str(post).lower().find(request.POST['search_term'].lower()) != -1:
+        if str(post).lower().find(request.POST['search_term'].lower()) != -1 or \
+             post.body.lower().find(request.POST['search_term'].lower()) != -1:
             search_results.append(post)
             num_of_results += 1
 
