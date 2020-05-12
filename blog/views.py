@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.contrib import messages
+from django.core.mail import send_mail
 
 from .models import Post, Comment
 
@@ -31,6 +32,10 @@ def detail_post(request, pk):
 def add_comment(request, pk):
     """Add comment to post"""
     post = Post.objects.get(pk=pk)
+    subject = 'Wave from Portfolio Blog'
+    message = 'from: {} \npost: {}\n\n{}'.format(request.POST['person'], post.title, request.POST['body'])
+    sender = 'f_dimitrievski@outlook.com'
+    receiver = ['filipdimi1999@gmail.com']
 
     if request.method == 'POST':
         if request.POST['person'] and request.POST['body']:
@@ -41,6 +46,7 @@ def add_comment(request, pk):
             new_comment.post = post
             new_comment.save()
 
+            send_mail(subject, message, sender, receiver)
             messages.add_message(request, messages.INFO, 'Comment created!')
             return redirect('detail_post', pk)
         else:
