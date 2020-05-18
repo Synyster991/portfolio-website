@@ -28,6 +28,28 @@ def sample_video(fk_course=None):
     )
 
 
+def sample_postqa():
+    return models.PostQA.objects.create(
+        title='World Wibe Web',
+        person='John Smith',
+        body='Lorem ipsun Lorem ipsun Lorem ipsun Lorem ipsun.',
+        source_link='www.filipdimitrievski.com'
+    )
+
+
+def sample_commentqa(fk_post=None):
+    if not fk_post:
+        temp_post = sample_postqa()
+    else:
+        temp_post = fk_post
+
+    return models.CommentQA.objects.create(
+        person='John Smith',
+        body='Lorem ipsun Lorem ipsun Lorem ipsun Lorem ipsun.',
+        post=temp_post
+    )
+
+
 class CourseModelTests(TestCase):
     """Test basic functionality of Course model"""
     def test_list_all_course(self):
@@ -77,3 +99,50 @@ class VideoModelTests(TestCase):
         video1 = sample_video()
 
         self.assertEqual(str(video1), video1.title)
+
+
+class PostQAModelTests(TestCase):
+    """Test basic functionality of PostQA"""
+    def test_list_all_posts(self):
+        """List posts on Q&A"""
+        sample_postqa()
+
+        exists = models.PostQA.objects.all().exists()
+        self.assertTrue(exists)
+
+    def test_detail_specific_post(self):
+        """Show detail about post"""
+        post1 = sample_postqa()
+        sample_postqa()
+
+        res = models.PostQA.objects.filter(
+            pk=post1.pk
+        )
+        self.assertTrue(res.exists())
+        self.assertEqual(len(res), 1)
+
+    def test_string_representation(self):
+        """__str__ PostQA"""
+        post = sample_postqa()
+        self.assertEqual(str(post), post.title)
+
+
+class CommentQAModelTest(TestCase):
+    """Test basic functionality of CommentQA"""
+    def test_list_comments_for_specific_post(self):
+        post1 = sample_postqa()
+        sample_commentqa(post1)
+        sample_commentqa()
+
+        res = models.CommentQA.objects.filter(
+            post=post1
+        )
+        exists = res.exists()
+
+        self.assertTrue(exists)
+        self.assertEqual(len(res), 1)
+
+    def test_string_representation(self):
+        """Test __str__ for CommentQA"""
+        comment = sample_commentqa()
+        self.assertEqual(str(comment), "{} - {}".format(comment.post.title, comment.person))
