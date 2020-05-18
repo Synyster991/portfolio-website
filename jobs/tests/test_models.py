@@ -71,4 +71,4 @@ class AchievementModelTest(TestCase):
     def test_description_summary(self):
         """Test the summary"""
         achievement = sample_achievement()
-        self.assertEqual(len(achievement.summary()), 150)
+        self.assertEqual(len(achievement.summary()), 100)
