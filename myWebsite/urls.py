@@ -15,5 +15,6 @@ urlpatterns = [
     # RE-DIRECT
     path('jobs/', include('jobs.urls')),
     path('blog/', include('blog.urls')),
+    path('tutor/', include('tutor.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

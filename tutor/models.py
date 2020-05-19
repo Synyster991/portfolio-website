@@ -7,9 +7,14 @@ class Course(models.Model):
     language = models.CharField(max_length=255)
     body = models.TextField()
     author = models.CharField(max_length=255)
+    course_color = models.CharField(max_length=10, blank=True)
 
     def __str__(self):
         return "{}".format(self.title)
+
+    def summary(self):
+        """Print summary of the body"""
+        return "{}...".format(self.body[:174])
 
 
 class Video(models.Model):
