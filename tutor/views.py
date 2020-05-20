@@ -16,11 +16,12 @@ def tutor_home(request):
 def detail_course(request, pk):
     course = models.Course.objects.get(pk=pk)
     videos = models.Video.objects.filter(course=course)
+    show_video = videos[0]
 
     passing_dict = {
         'course': course,
         'videos': videos,
-        'show_video': videos[0],
+        'show_video': show_video,
     }
     return render(request, 'tutor/detail_course.html', passing_dict)
 
