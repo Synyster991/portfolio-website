@@ -29,7 +29,14 @@
         </button>
         <div class="dropdown-menu">
           {% for video in videos %}
-          <a class="dropdown-item" href="{% url 'play_video' course.pk video.pk %}">{{ video.title }}</a>
+          <a class="dropdown-item" href="{% url 'play_video' course.pk video.pk %}">
+          {{ video.title }}
+          {% if video == show_video %}
+          <svg class="bi bi-play-fill" width="1.7em" height="1.7em" viewBox="0 0 16 16" fill="#{{ course.course_color }}" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
+          </svg>
+          {% endif %}
+          </a>
           {% endfor %}
         </div>
       </div>
