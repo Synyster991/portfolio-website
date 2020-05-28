@@ -41,6 +41,10 @@ class PostQA(models.Model):
     def __str__(self):
         return "{}".format(self.title)
 
+    def summary(self):
+        """Short text from body"""
+        return "{}...".format(self.body[:250])
+
 
 class CommentQA(models.Model):
     """Model for commenting on QA post"""

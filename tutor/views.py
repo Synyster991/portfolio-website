@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.views import generic
+from django.urls import reverse_lazy
 from django.contrib import messages
 from tutor import models
 
@@ -6,9 +8,11 @@ from tutor import models
 def tutor_home(request):
     """Show home page of Tutor"""
     courses = models.Course.objects.all()
+    posts = models.PostQA.objects.all()
 
     passing_dict = {
-        'courses': courses
+        'courses': courses,
+        'posts': posts,
     }
     return render(request, 'tutor/tutor_home.html', passing_dict)
 
@@ -42,6 +46,7 @@ def play_video(request, pk, video_pk):
 def search_courses(request):
     """Find a course or video by user search value"""
     courses = models.Course.objects.all()
+    posts = models.PostQA.objects.all()
     search_result = []
     num_of_results = 0
 
@@ -71,8 +76,60 @@ def search_courses(request):
 
     passing_dict = {
         'courses': courses,
+        'posts': posts,
         'num_of_results': num_of_results,
         'message_type': message_type,
         'message': message
     }
     return render(request, 'tutor/tutor_home.html', passing_dict)
+
+
+def search_qa(request):
+    """Search for existing post"""
+    posts = models.PostQA.objects.all()
+    search_result = []
+    nums_of_results = 0
+
+    if not request.POST['search_value_qa']:
+        return redirect('tutor_home')
+    for post in posts:
+        if str(post).lower().find(request.POST['search_value_qa'].lower()) != -1:
+            search_result.append(post)
+            nums_of_results += 1
+        elif post.body.lower().find(request.POST['search_value_qa'].lower()) != -1:
+            search_result.append(post)
+            nums_of_results += 1
+        else:
+            comments = models.CommentQA.objects.filter(post=post)
+            for comment in comments:
+                if str(comment).lower().find(request.POST['search_value_qa'].lower()) != -1:
+                    search_result.append(post)
+                    nums_of_results += 1
+
+    if search_result:
+        posts = search_result
+        message_type = 'success_qa'
+        if nums_of_results == 1:
+            message = ['{} results is found'.format(nums_of_results)]
+        else:
+            message = ['{} results are found'.format(nums_of_results)]
+    else:
+        message_type = 'error_qa'
+        message = ["Unfortunately that content doesn't exists"]
+
+    passing_dict = {
+        'posts': posts,
+        'nums_of_results': nums_of_results,
+        'message_type': message_type,
+        'message_qa': message
+    }
+    return render(request, 'tutor/tutor_home.html', passing_dict)
+
+
+class create_post(generic.CreateView):
+    """Create Post"""
+    model = models.PostQA
+    fields = ['title', 'person', 'body', 'source_link']
+    template_name = 'tutor/tutor_home.html'
+    success_url = reverse_lazy('tutor_home')
+
