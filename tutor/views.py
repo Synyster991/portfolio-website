@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -18,7 +18,7 @@ def tutor_home(request):
 
 
 def detail_course(request, pk):
-    course = models.Course.objects.get(pk=pk)
+    course = get_object_or_404(models.Course, pk=pk)
     videos = models.Video.objects.filter(course=course)
     show_video = videos[0]
 
@@ -31,9 +31,9 @@ def detail_course(request, pk):
 
 
 def play_video(request, pk, video_pk):
-    course = models.Course.objects.get(pk=pk)
+    course = get_object_or_404(models.Course, pk=pk)
     videos = models.Video.objects.filter(course=course)
-    show_video = models.Video.objects.get(pk=video_pk)
+    show_video = get_object_or_404(models.Video, pk=video_pk)
 
     passing_dict = {
         'course': course,
@@ -128,7 +128,7 @@ def search_qa(request):
 
 def question_detail(request, post_pk):
     """Show details of question"""
-    post = models.PostQA.objects.get(pk=post_pk)
+    post = get_object_or_404(models.PostQA, pk=post_pk)
     comments = models.CommentQA.objects.filter(post=post)
 
     passing_dict = {
@@ -140,7 +140,7 @@ def question_detail(request, post_pk):
 
 def add_comment(request, post_pk):
     """Create Comment for a post"""
-    post = models.PostQA.objects.get(pk=post_pk)
+    post = get_object_or_404(models.PostQA, pk=post_pk)
 
     if request.method == 'POST':
         if request.POST['name_field'] and request.POST['comment_field']:
