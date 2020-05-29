@@ -49,7 +49,7 @@ class PostQA(models.Model):
 class CommentQA(models.Model):
     """Model for commenting on QA post"""
     person = models.CharField(max_length=255)
-    body = models.CharField(max_length=255)
+    body = models.TextField()
     post = models.ForeignKey(PostQA, on_delete=models.CASCADE)
 
     def __str__(self):

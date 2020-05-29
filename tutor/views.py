@@ -126,10 +126,44 @@ def search_qa(request):
     return render(request, 'tutor/tutor_home.html', passing_dict)
 
 
+def question_detail(request, post_pk):
+    """Show details of question"""
+    post = models.PostQA.objects.get(pk=post_pk)
+    comments = models.CommentQA.objects.filter(post=post)
+
+    passing_dict = {
+        'post': post,
+        'comments': comments
+    }
+    return render(request, 'tutor/detail_question.html', passing_dict)
+
+
+def add_comment(request, post_pk):
+    """Create Comment for a post"""
+    post = models.PostQA.objects.get(pk=post_pk)
+
+    if request.method == 'POST':
+        if request.POST['name_field'] and request.POST['comment_field']:
+            temp_comment = models.CommentQA()
+            temp_comment.person = request.POST['name_field']
+            temp_comment.body = request.POST['comment_field']
+            temp_comment.post = post
+            temp_comment.save()
+
+            return redirect('question_detail', post_pk)
+        else:
+            return redirect('question_detail', post_pk)
+    else:
+        return redirect('question_detail', post_pk)
+
+
 class create_post(generic.CreateView):
     """Create Post"""
     model = models.PostQA
     fields = ['title', 'person', 'body', 'source_link']
     template_name = 'tutor/tutor_home.html'
     success_url = reverse_lazy('tutor_home')
+
+
+
 
