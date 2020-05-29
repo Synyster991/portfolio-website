@@ -8,7 +8,7 @@ from tutor import models
 def tutor_home(request):
     """Show home page of Tutor"""
     courses = models.Course.objects.all()
-    posts = models.PostQA.objects.all()
+    posts = models.PostQA.objects.all().order_by('-id')
 
     passing_dict = {
         'courses': courses,
@@ -46,7 +46,7 @@ def play_video(request, pk, video_pk):
 def search_courses(request):
     """Find a course or video by user search value"""
     courses = models.Course.objects.all()
-    posts = models.PostQA.objects.all()
+    posts = models.PostQA.objects.all().order_by('-id')
     search_result = []
     num_of_results = 0
 
@@ -86,7 +86,7 @@ def search_courses(request):
 
 def search_qa(request):
     """Search for existing post"""
-    posts = models.PostQA.objects.all()
+    posts = models.PostQA.objects.all().order_by('-id')
     search_result = []
     nums_of_results = 0
 
