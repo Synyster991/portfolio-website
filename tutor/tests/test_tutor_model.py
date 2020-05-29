@@ -97,8 +97,9 @@ class VideoModelTests(TestCase):
     def test_string_representation(self):
         """Test __str__"""
         video1 = sample_video()
+        temp_str = "{} - {}".format(video1.title, video1.course.title)
 
-        self.assertEqual(str(video1), video1.title)
+        self.assertEqual(str(video1), temp_str)
 
 
 class PostQAModelTests(TestCase):

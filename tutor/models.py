@@ -28,7 +28,7 @@ class Video(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{}".format(self.title)
+        return "{} - {}".format(self.title, self.course.title)
 
 
 class PostQA(models.Model):

@@ -163,7 +163,3 @@ class create_post(generic.CreateView):
     fields = ['title', 'person', 'body', 'source_link']
     template_name = 'tutor/tutor_home.html'
     success_url = reverse_lazy('tutor_home')
-
-
-
-
