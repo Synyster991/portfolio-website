@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contect %}
+
+<img src="{% static 'drops.png' %}" width="100%" class="edit-drops-margins"/>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 mb-2">
+      <img src="{% static 'findFilip.png' %}" alt="about" width="60%" class="rounded-circle" style="border-style: solid; border-color: #B12425; border-width: 7px;"/>
+    </div>
+    <div class="col-sm-8">
+      <p class="text-justify">Sharing social media accounts never been easier. Just scroll down and click the icon you prefer to use it.</p>
+    </div>
+  </div>
+  <hr>
+  <div class="text-center">
+  <div class="row mb-3">
+    <div class="col">
+      <a class="hover-card-effect" href="https://www.instagram.com/___synyster/" target="_blank">
+      <img src="{% static 'social-icons/instagram.png' %}" alt="social-media" width="100%" class="edit-drops-margins"/>
+        </a>
+    </div>
+    <div class="col">
+      <a class="hover-card-effect" href="https://www.snapchat.com/add/filipdimi99" target="_blank">
+      <img src="{% static 'social-icons/snapchat.png' %}" alt="social-media" width="100%" class="edit-drops-margins"/>
+        </a>
+    </div>
+    <div class="col">
+      <a class="hover-card-effect" href="mailto:filipdimi1999@gmail.com" target="_blank">
+      <img src="{% static 'social-icons/email.png' %}" alt="social-media" width="100%" class="edit-drops-margins"/>
+        </a>
+    </div>
+  </div>
+        <div class="row mb-5  ">
+    <div class="col">
+      <a class="hover-card-effect" href="tel:+15866466402" target="_blank">
+      <img src="{% static 'social-icons/phone.png' %}" alt="social-media" width="100%" class="edit-drops-margins"/>
+        </a>
+    </div>
+    <div class="col">
+      <a class="hover-card-effect" href="https://www.facebook.com/filip.dimitrievski.18" target="_blank">
+      <img src="{% static 'social-icons/facebook.png' %}" alt="social-media" width="100%" class="edit-drops-margins"/>
+        </a>
+    </div>
+              <div class="col">
+      <a class="hover-card-effect" href="http://filipdimitrievski.com/about/" target="_blank">
+      <img src="{% static 'social-icons/info.png' %}" alt="social-media" width="100%" class="edit-drops-margins"/>
+        </a>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

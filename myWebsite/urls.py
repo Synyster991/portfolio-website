@@ -11,6 +11,7 @@ urlpatterns = [
     # BASE URLS
     path('', jobs_views.index, name='home'),
     path('about/', jobs_views.about, name='about'),
+    path('find_me', jobs_views.find_me, name='find_me'),
     path('about/send_email/', jobs_views.send_email_from_about, name='send_email_from_about'),
     # RE-DIRECT
     path('jobs/', include('jobs.urls')),

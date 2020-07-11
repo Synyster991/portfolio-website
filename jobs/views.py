@@ -24,6 +24,10 @@ def about(request):
     return render(request, 'jobs/about.html')
 
 
+def find_me(request):
+    return render(request, 'jobs/find_me.html')
+
+
 def portfolio(request):
     """Redirect to portfolio and return all jobs """
     jobs = Job.objects.all().order_by('-id')
