@@ -25,6 +25,12 @@ def about(request):
 
 
 def find_me(request):
+    subject = 'Find Me Feature Activated'
+    message = 'Someone is spying on you. O.O'
+    sender = 'f_dimitrievski@outlook.com'
+    receiver = ['filipdimi1999@gmail.com']
+    send_mail(subject, message, sender, receiver)
+
     return render(request, 'jobs/find_me.html')
 
 
