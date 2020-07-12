@@ -5,6 +5,19 @@
 <img src="{% static 'drops.png' %}" width="100%" class="edit-drops-margins" />
 <div class="container">
   <h1>Blog</h1>
+   {% if message %}
+      {% if msg_num > 1%}
+      <div class="alert alert-danger mt-1" role="alert">
+      {% else %}
+      <div class="alert alert-success mt-1" role="alert">
+      {% endif %}
+      <ul>
+        {% for msg in message %}
+        <li><small id="emailHelp" class="form-text text-muted">{{ msg }}</small></li>
+        {% endfor %}
+      </ul>
+      </div>
+      {% endif %}
   <form method="post" action="{% url 'search_post' %}" class="mb-4">
         <div class="input-group mb-3">
           {% csrf_token %}
