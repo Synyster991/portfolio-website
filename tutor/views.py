@@ -43,7 +43,7 @@ def detail_course(request, pk):
 
 def play_video(request, pk, video_pk):
     course = get_object_or_404(models.Course, pk=pk)
-    videos = models.Video.objects.filter(course=course)
+    videos = models.Video.objects.filter(course=course).order_by('id')
     show_video = get_object_or_404(models.Video, pk=video_pk)
 
     videos = add_numbers_to_videos(videos)
