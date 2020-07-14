@@ -5,6 +5,15 @@ from django.contrib import messages
 from tutor import models
 
 
+#### Helper Functions
+def add_numbers_to_videos(video_arr):
+    for i in range(0, len(video_arr)):
+        temp_video_title = "{}. {}".format(str(i+1), video_arr[i].title)
+        video_arr[i].title = temp_video_title
+
+    return video_arr
+####
+
 def tutor_home(request):
     """Show home page of Tutor"""
     courses = models.Course.objects.all()
@@ -19,8 +28,10 @@ def tutor_home(request):
 
 def detail_course(request, pk):
     course = get_object_or_404(models.Course, pk=pk)
-    videos = models.Video.objects.filter(course=course)
+    videos = models.Video.objects.filter(course=course).order_by('id')
     show_video = videos[0]
+
+    videos = add_numbers_to_videos(videos)
 
     passing_dict = {
         'course': course,
@@ -34,6 +45,8 @@ def play_video(request, pk, video_pk):
     course = get_object_or_404(models.Course, pk=pk)
     videos = models.Video.objects.filter(course=course)
     show_video = get_object_or_404(models.Video, pk=video_pk)
+
+    videos = add_numbers_to_videos(videos)
 
     passing_dict = {
         'course': course,

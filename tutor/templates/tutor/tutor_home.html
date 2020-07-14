@@ -60,8 +60,12 @@
     <div class="album">
       <div class="row">
         {% for course in courses %}
+        {% if course.is_active %}
         <div class="col-md-4 hover-card-effect">
           <a href="{% url 'detail_course' course.pk  %}" class="hover-card-effect text-muted text-decoration-none">
+          {% else %}
+        <div class="col-md-4 disabled-course">
+          {% endif %}
             <div class="card mb-4 shadow-lg">
               <div class="pl-3 pt-2" style="background: #{{ course.course_color }}; height: 2.7rem;">
                 <svg class="bi bi-book" width="1.3em" height="1.3em" viewBox="0 0 16 16" fill="white"
@@ -75,7 +79,7 @@
                 </svg>
               </div>
               <div class="card-body pb-4">
-                <h6 class="mb-0">Course</h6>
+                <h6 class="mb-0">{% if course.is_active == False %}<span class="disabled-course-title">Unavailable </span>{% endif %}Course</h6>
                 <h5>{{ course.title }}</h5>
                 <p class="card-text text-justify pb-2">{{ course.summary }}</p>
                 <span class="border border-dark rounded-pill font-weight-bold pt-1 pb-1 pl-2 pr-2"
@@ -84,7 +88,9 @@
                 </span>
               </div>
             </div>
+            {% if course.is_active %}
           </a>
+          {% endif%}
         </div>
         {% endfor %}
       </div>

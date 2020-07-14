@@ -7,6 +7,7 @@ class Course(models.Model):
     language = models.CharField(max_length=255)
     body = models.TextField()
     author = models.CharField(max_length=255)
+    is_active = models.BooleanField(default=False)
     course_color = models.CharField(max_length=10, blank=True)
 
     def __str__(self):
