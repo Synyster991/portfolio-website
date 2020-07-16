@@ -88,4 +88,9 @@ def send_email_from_about(request):
 
     send_mail(subject, message, sender, receiver)
     send_mail(auto_reply_subject, auto_reply_message, sender, auto_reply_receiver)
+
     return redirect('about')
+
+
+def date(request):
+    return render(request, 'jobs/date.html')
