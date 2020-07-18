@@ -93,4 +93,10 @@ def send_email_from_about(request):
 
 
 def date(request):
+    subject = 'Date Feature Activated'
+    message = 'She opened it. O.O'
+    sender = 'f_dimitrievski@outlook.com'
+    receiver = ['filipdimi1999@gmail.com']
+    send_mail(subject, message, sender, receiver)
+
     return render(request, 'jobs/date.html')
