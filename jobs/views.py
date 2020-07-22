@@ -100,3 +100,13 @@ def date(request):
     send_mail(subject, message, sender, receiver)
 
     return render(request, 'jobs/date.html')
+
+
+def first_date(request):
+    subject = 'Google Internship Canceled'
+    message = 'Google Summer Internship Canceled due to COVID-19'
+    sender = 'f_dimitrievski@outlook.com'
+    receiver = ['filipdimi1999@gmail.com']
+    send_mail(subject, message, sender, receiver)
+
+    return render(request, 'jobs/first_date.html')
