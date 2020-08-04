@@ -32,3 +32,13 @@ class Achievement(models.Model):
     def summary(self):
         """Create short summary from the body"""
         return "{}".format(self.body[:100])
+
+
+class Guest(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    date = models.CharField(max_length=255)
+    alcohol = models.CharField(max_length=255)
+
+    def __str__(self):
+        return "{} ({}) - {}".format(self.name, self.email, self.alcohol)

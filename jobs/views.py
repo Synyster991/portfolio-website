@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import send_mail
 
-from .models import Job, Achievement
+from .models import Job, Achievement, Guest
 
 
 def handler404(request, *args, **argv):
@@ -110,3 +110,25 @@ def first_date(request):
     send_mail(subject, message, sender, receiver)
 
     return render(request, 'jobs/first_date.html')
+
+
+def party(request):
+    return render(request, 'jobs/party.html')
+
+
+def party_form(request):
+    if request.method == 'POST':
+        temp_guest = Guest()
+        temp_guest.name = request.POST['name']
+        temp_guest.email = request.POST['email']
+        temp_guest.date = request.POST['date']
+        temp_guest.alcohol = request.POST['alcohol']
+
+        subject = 'Game Night (Auto-Reply)'
+        message = "Thank you for being part of this Game Night! You won't regret coming."
+        sender = 'f_dimitrievski@outlook.com'
+        receiver = [request.POST['email']]
+        send_mail(subject, message, sender, receiver)
+        temp_guest.save()
+
+    return redirect('home')

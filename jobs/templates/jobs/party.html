@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contect %}
+<img src="{% static 'drops.png' %}" width="100%" class="edit-drops-margins" />
+<div class="container">
+    <div class="row">
+        <h1>You Have Been Invited to Game Night</h1><br>
+    </div>
+    <div class="row">
+        <span>Hosted by Filip Dimitrievski</span>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="text-justify">This Game Night includes Board Games, Videos Games and ALCOHOL!
+                In addition, there gonna be First Place Price for the winner that excludes the host.
+            </p>
+            <h5>Please fill the following form. :D</h5>
+        </div>
+        <div class="col-md-6">
+            <form method="POST" action="{% url 'submit_form' %}" class="mb-5">{% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Email</label>
+                    <input type="email" class="form-control" id="exampleInputPassword1" name='email'>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Preffered Date</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" name='date'>
+                    <small id="emailHelp" class="form-text text-muted">Please list your preferred date. (August 12, 13 or 14)</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Alcohol</label>
+                    <input type="text" class="form-control" id="exampleInputAlcohol" aria-describedby="emailHelp" name="alcohol">
+                    <small id="emailHelp" class="form-text text-muted">There gonna be alcohol, but bring some just in case if we ran out. ;)</small>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">I Agree to the Terms to Have Fun</label>
+                </div>
+                <button type="submit" class="btn btn-block btn-danger">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
